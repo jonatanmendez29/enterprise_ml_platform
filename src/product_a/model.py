@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from typing import Dict, List
 import joblib
 from feast import FeatureStore
@@ -27,21 +28,28 @@ def load_local_model() -> RandomForestRegressor:
 def fetch_online_features(request: Dict) -> List[float]:
     fs = FeatureStore(repo_path=FEATURE_STORE_PATH)
 
-    feature_rows = [
+    event_ts = request.get("event_timestamp")
+    if event_ts is None:
+        event_ts = datetime.utcnow().isoformat()
+
+    entity_rows = [
         {
             "customer_id": request["customer_id"],
             "product_id": request["product_id"],
-            "event_timestamp": request.get("event_timestamp"),
+            "event_timestamp": event_ts,
         }
     ]
 
-    vector = fs.get_online_features(feature_refs=FEATURE_REFS, entity_rows=feature_rows).to_dict()
+    try:
+        feature_vector = fs.get_online_features(feature_refs=FEATURE_REFS, entity_rows=entity_rows)
+        vector_dict = feature_vector.to_dict()
 
-    # Assert ordering
-    return [
-        float(vector[ref.split(":")[1]][0])
-        for ref in FEATURE_REFS
-    ]
+        return [
+            float(vector_dict[list(vector_dict.keys())[i]][0])
+            for i in range(len(FEATURE_REFS))
+        ]
+    except Exception as e:
+        raise RuntimeError(f"Failed to fetch online features: {e}")
 
 
 def predict(request: Dict, model: RandomForestRegressor) -> float:

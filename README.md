@@ -28,7 +28,12 @@ A production-grade, scalable Machine Learning Operations platform supporting:
    - `python pipelines/product_a/train.py`
 4. Run BDD tests:
    - `pytest -q`
-5. Build BentoML service (Product A):
-   - `bentoml build` (future step after `bentoml_service.py` integration if using BentoML yaml)
-6. Deploy to Kubernetes via Helm chart:
+4. Run local infra in docker-compose:
+   - `docker compose -f infra/docker-compose.yml up -d`
+   - `source infra/setup/env_vars.sh`
+5. Bootstrap Feast Product A state:
+   - `bash infra/setup/feast_product_a.sh`
+6. Build BentoML service (Product A):
+   - `bentoml build` (or direct in-code runner via `src/product_a/bento_service.py`)
+7. Deploy to Kubernetes via Helm chart (A/B 90/10):
    - `helm install product-a deploy/helm/product-a --namespace dev`

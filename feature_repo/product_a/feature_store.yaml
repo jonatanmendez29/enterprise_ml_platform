@@ -7,4 +7,4 @@ offline_store:
 
 online_store:
   type: redis
-  connection: localhost:6379
+  connection: redis://localhost:6379

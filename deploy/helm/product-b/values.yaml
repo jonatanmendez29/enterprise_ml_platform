@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: your-docker-hub-username/product-a-service
+  repository: your-docker-hub-username/product-b-service
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -17,18 +17,6 @@ resources:
     cpu: 200m
     memory: 256Mi
 
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 70
-
-canary:
-  enabled: true
-  primaryWeight: 90
-  canaryWeight: 10
-
-# Product B will use sequential promotion via values in its chart
 promotion:
   strategy: "sequential"
 
