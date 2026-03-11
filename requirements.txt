@@ -1,0 +1,7 @@
+bentoml
+feast
+mlflow
+pandas
+scikit-learn
+pytest
+ruff
