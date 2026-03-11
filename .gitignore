@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak
+venv.bak
+
+# IDEs
+.idea/
+.vscode/
+
+# Notebooks
+.ipynb_checkpoints
+
+# DVC
+.dvc/cache
+.dvc/tmp
+.dvc/lock
+
+# MLflow
+mlruns/
+.mlflow/
+
+# Terraform
+.terraform/
+
+# Kubernetes
+*.yaml.bak
+*.yml.bak
+
+# Docker
+*.dockerignore
+*.dockerfile
+
+# Logs
+*.log
+
+# Data
+*.csv
+*.json
+*.parquet
+
+# Misc
+*.zip
+*.tar.gz
+
+# Build artifacts
+target/
+
+# Helm
+charts/
+*.tgz
+
+# MinIO
+data/
+.minio.sys/
+
+# AWS
+.aws/
+*.pem
