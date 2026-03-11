@@ -4,4 +4,5 @@ mlflow
 pandas
 scikit-learn
 pytest
+pytest-bdd
 ruff

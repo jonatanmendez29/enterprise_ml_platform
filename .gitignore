@@ -66,3 +66,6 @@ data/
 # AWS
 .aws/
 *.pem
+
+*.png
+info.md

@@ -21,8 +21,8 @@ This repository implements the Enterprise MLOps Platform architecture described 
 
 ## Next milestones
 
-1. Setup Feast repo and feature set definitions.
-2. Implement training pipelines (Kubeflow) for both products.
-3. Add model registration flows to MLflow.
-4. Add deployment templates with values for HPA and Ingress.
-5. Add observability export hooks (Prometheus metrics) and Evidently pipelines.
+1. Setup Feast repo and feature set definitions (Product A first). 
+2. Implement training pipeline for Product A (data generation -> training -> MLflow model logging).
+3. Add Psi/bento model serve path with Kubernetes Helm chart from deploy/helm/product-a.
+4. Add BDD coverage (pytest-bdd) for Product A key scenario.
+5. Implement model inference route and Prometheus metrics exporter.

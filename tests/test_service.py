@@ -1,5 +1,3 @@
-import pytest
-
 from src.product_a.service import ForecastRequest
 from src.product_b.service import RecommendationRequest
 

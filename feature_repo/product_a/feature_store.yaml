@@ -1,0 +1,10 @@
+project: product_a
+provider: local
+
+offline_store:
+  type: file
+  path: ../data/product_a/raw
+
+online_store:
+  type: redis
+  connection: localhost:6379
