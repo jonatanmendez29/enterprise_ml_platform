@@ -20,7 +20,15 @@ A production-grade, scalable Machine Learning Operations platform supporting:
 - `tests/` - unit/integration tests
 
 ## Getting started
-1. Install dependencies (Python 3.10+, BentoML, Feast, MLflow, pytest, ruff)
-2. Run linter: `ruff check src tests`
-3. Run unit tests: `pytest tests`
-4. (`future`) install on-local k8s via Kind and use `deploy/` charts
+1. Install dependencies (Python 3.10+, BentoML, Feast, MLflow, pytest, ruff).
+   - `pip install -r requirements.txt`
+2. Generate synthetic product A data:
+   - `python data/generate_product_a_data.py`
+3. Train product A model:
+   - `python pipelines/product_a/train.py`
+4. Run BDD tests:
+   - `pytest -q`
+5. Build BentoML service (Product A):
+   - `bentoml build` (future step after `bentoml_service.py` integration if using BentoML yaml)
+6. Deploy to Kubernetes via Helm chart:
+   - `helm install product-a deploy/helm/product-a --namespace dev`

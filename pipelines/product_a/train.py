@@ -1,5 +1,6 @@
 import os
 import mlflow
+import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -35,8 +36,10 @@ if __name__ == "__main__":
         mlflow.log_param("n_estimators", 100)
         mlflow.log_metric("rmse", float(rmse))
 
-        artifact_path = os.path.join(MODEL_DIR, "rf_inventory_forecast.pkl")
-        mlflow.sklearn.log_model(model, artifact_path)
+        artifact_name = "rf_inventory_forecast"
+        local_output_path = os.path.join(MODEL_DIR, f"{artifact_name}.joblib")
+        joblib.dump(model, local_output_path)
+        mlflow.sklearn.log_model(model, artifact_name)
 
         print(f"Finished training; RMSE = {rmse:.3f}")
-        print(f"Model artifact saved to {artifact_path}")
+        print(f"Model artifact saved to {local_output_path}")
